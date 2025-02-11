@@ -1,14 +1,7 @@
-import React,{useState} from 'react'
-import useStorageState from './useStorageState';
-
+import React from 'react'
+import useCounter from './useCounter';
 function Counter() {
-    var [counter,setCounter]=useStorageState(0);
-    function inc(){
-        setCounter(counter+1)
-    }
-    function dec(){
-        setCounter(counter-1)
-    }
+    var [counter,inc,dec]=useCounter()
   return (
     <div className='border border-2 m-3 p-3'>
         <h1>Counter:{counter}</h1>
