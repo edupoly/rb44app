@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var ar = [10,20,49,17]
+        Object.freeze(ar)
+
+        ar = [...ar,50]
+
+        console.log(ar)
+
+        let ob = {firstname:'praveen',lastname:'gubbala'}
+        Object.freeze(ob)
+
+        ob = {...ob,firstname:'srikanth'}
+
+        console.log(ob)
+
+        var ob3 = {
+            a:10,
+            b:20,
+            a:40
+        }
+        console.log(ob3)
+    </script>
+</body>
+</html>
