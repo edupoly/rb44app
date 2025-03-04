@@ -4,11 +4,47 @@ import './index.css';
 import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
-
+import {
+    createBrowserRouter,
+    RouterProvider,
+  } from "react-router-dom";
+import Products from './features/products/Products';
+import Todolist from './features/todolist/Todolist';
+import Countries from './features/countries/Countries';
+import ProductDetails from './features/products/ProductDetails';
+import MyProducts from './features/myproducts/MyProducts';
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <App></App>,
+      children:[
+        {
+            path:"/products",
+            element:<Products></Products>,
+        },
+        {
+            path:"/todolist",
+            element:<Todolist></Todolist>
+        },
+        {
+            path:"/countries",
+            element:<Countries></Countries>
+        },
+        {
+            path:"/products/:id",
+            element:<ProductDetails></ProductDetails>
+        },
+        {
+            path:"/myproducts",
+            element:<MyProducts></MyProducts>
+        }
+      ]
+    },
+  ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        <App />
+        <RouterProvider router={router} />
     </Provider>
 );
 
