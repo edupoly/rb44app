@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDeleteProductMutation, useGetAllMyProductsQuery, useLazyGetAllMyProductsQuery } from '../../services/myproducts'
 import AddProduct from './AddProduct'
 import { useLazyGetProductDetailsByIdQuery } from '../../services/products'
 import Product from './Product'
+import DeleteModal from './DeleteModal'
 
 
 function MyProducts() {
@@ -10,8 +11,9 @@ function MyProducts() {
     var {isLoading,data:myproducts}=useGetAllMyProductsQuery()
     var [getAllProductsLazyFn]=useLazyGetAllMyProductsQuery()
     var [deleteProdFn] = useDeleteProductMutation()
-    function deleteProduct(){
-        deleteProdFn().then(()=>{
+    var [delProdId,setdelProdId] = useState(null)
+    function deleteProduct(id){
+        deleteProdFn(id).then(()=>{
             getAllProductsLazyFn();
         }).catch()
     }
@@ -24,10 +26,12 @@ function MyProducts() {
         <div className="d-flex">
             {
                 !isLoading && myproducts.map((product)=>{
-                    return <Product {...product}></Product>
+                    return <Product {...product} setdelProdId={setdelProdId}></Product>
                 })
             }
         </div>
+        <DeleteModal id={delProdId} deleteProduct={deleteProduct}></DeleteModal>
+
     </div>
   )
 }
