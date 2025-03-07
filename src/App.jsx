@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 function App() {
   var navigate = useNavigate();
@@ -15,7 +16,7 @@ function App() {
   },[])
   return (
     <div>
-      <h1 className="bg-success">Hello Leads</h1>
+      <Navbar></Navbar>
       <Outlet></Outlet>
     </div>
   );

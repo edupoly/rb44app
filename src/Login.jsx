@@ -1,26 +1,22 @@
 import { useFormik } from 'formik'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLoginUserMutation } from './services/userApi';
+import { useDispatch } from 'react-redux';
+import { updateUser } from './features/user/userSlice';
 
 function Login() {
     var navigate = useNavigate();
+    var [loginUserFn]=useLoginUserMutation()
+    var dispatch = useDispatch()
     var loginForm = useFormik({
                         initialValues:{
                             username:'',
                             password:''
                         },
                         onSubmit:(values)=>{
-                            fetch("http://localhost:4000/login",{
-                                method:'POST',
-                                headers:{
-                                    'Content-Type':'application/json'
-                                },
-                                body:JSON.stringify(values)
-                            })
-                            .then((res)=>res.json())
-                            .then(data=>{
-                                window.localStorage.setItem('token',data.token);
-                                navigate("/home")
+                            loginUserFn(values).then((res)=>{
+                                dispatch(updateUser(res))
                             })
                         }
                     })

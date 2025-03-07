@@ -8,7 +8,8 @@ import {
   } from "react-router-dom";
 import Login from './Login';
 import Home from './Home';
-
+import { Provider } from 'react-redux';
+import { store } from './app/store';
   
   const router = createBrowserRouter([
     {
@@ -29,7 +30,9 @@ import Home from './Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
     <RouterProvider router={router}></RouterProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
