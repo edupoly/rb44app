@@ -11,7 +11,11 @@ import Home from './Home';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import AddLead from './features/leads/AddLead';
-  
+import { io } from "socket.io-client";
+
+export const socket = io("http://localhost:4140");
+socket.on("msg",(m)=>{console.log(m)})
+
   const router = createBrowserRouter([
     {
       path: "/",

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useLoginUserMutation } from './services/userApi';
 import { useDispatch } from 'react-redux';
 import { updateUser } from './features/user/userSlice';
+import { socket } from '.';
 
 function Login() {
     var navigate = useNavigate();
@@ -17,6 +18,7 @@ function Login() {
                         onSubmit:(values)=>{
                             loginUserFn(values).then((res)=>{
                                 dispatch(updateUser(res))
+                                socket.emit("updateUserStatus",{username:res.data.username,status:'online'})
                             })
                         }
                     })
