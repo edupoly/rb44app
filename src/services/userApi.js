@@ -14,10 +14,25 @@ export const userApi = createApi({
                 body:user
             }
         }
+    }),
+    getUserDetailsByToken:builder.query({
+      query:(token)=>{
+        return {
+          url:"/getDetailsByToken",
+          method:"GET",
+          headers:{
+            'token':window.localStorage.getItem("token")
+          }
+        }
+      }
     })
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginUserMutation } = userApi
+export const { 
+  useGetUserDetailsByTokenQuery,
+  useLazyGetUserDetailsByTokenQuery,
+  useLoginUserMutation 
+} = userApi

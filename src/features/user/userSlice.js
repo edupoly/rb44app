@@ -10,6 +10,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     updateUser:(state,{payload:{data}})=>{
+        console.log(data);
         state.username=data.username
         state.role=data.role
         window.localStorage.setItem("token",data.token)

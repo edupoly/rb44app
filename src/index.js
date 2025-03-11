@@ -10,6 +10,7 @@ import Login from './Login';
 import Home from './Home';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import AddLead from './features/leads/AddLead';
   
   const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ import { store } from './app/store';
         {
             path:"/home",
             element:<Home></Home>
+        },
+        {
+            path:"/addLead",
+            element:<AddLead></AddLead>
         },
       ]
     },
