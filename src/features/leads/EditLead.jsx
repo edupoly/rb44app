@@ -1,31 +1,39 @@
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useGetLeadDetailsByIdQuery } from '../../services/leadsApi';
 import { useFormik } from 'formik'
-import React from 'react'
-import { useAddLeadMutation } from '../../services/leadsApi';
 
-function AddLead() {
-    var [addLeadFn]=useAddLeadMutation()
-    
+function EditLead() {
+    var {id}=useParams();
+    var {isLoading,data}=useGetLeadDetailsByIdQuery(id);
+    console.log(isLoading);
     var leadForm = useFormik({
         initialValues:{
-            fullname:"mani",
-            mobile:"1231323",
-            email:"askjdh@gmail.com",
-            course:"reactjs",
+            fullname:data?.fullname,
+            mobile:data?.mobile,
+            email:data?.email,
+            course:data?.course,
             remarks:[{
-                text:"uytuy",
-                timestamp:Date.now()
+                text:data?.remarks[0].text,
+                timestamp:data?.remarks[0].timestamp
             }]
         },
         onSubmit:(values)=>{
-            leadForm.setFieldValue("course",leadForm.values.course.toUpperCase())
-            leadForm.values.course=leadForm.values.course.toUpperCase();
-            addLeadFn(leadForm.values).then(()=>{console.log('hihi');})
-            console.log("updated",values)
+            console.log(values);
         }
     })
+    useEffect(()=>{
+        console.log(isLoading);
+        if(data){
+            leadForm.setValues(data)
+        }
+    },[data])
   return (
     <div>
-        <h2>AddLead</h2>
+        <h2>EditLead</h2>
+        {
+            isLoading && <b>Loading</b>
+        }
         <form onSubmit={leadForm.handleSubmit}>
             <input type="text" {...leadForm.getFieldProps('fullname')} placeholder='FULLNAME'/>
             <br />
@@ -40,8 +48,11 @@ function AddLead() {
             <button type='submit'>Add Lead</button>
         </form>
         <i>{JSON.stringify(leadForm.values)}</i>
+        {
+            !isLoading && <i>{JSON.stringify(data)}</i>
+        }
     </div>
   )
 }
 
-export default AddLead
+export default EditLead

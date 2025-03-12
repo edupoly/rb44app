@@ -15,11 +15,40 @@ export const leadsApi = createApi({
             }
         }
     }),
+    deleteLead:builder.mutation({
+        query:(lead)=>{
+            return {
+                url:`/${lead.id}`,
+                method:"DELETE"
+            }
+        }
+    }),
+    getAllLeads:builder.query({
+      query:()=>{
+        return {
+          url:"/",
+          method:"GET"
+        }
+      }
+    }),
+    getLeadDetailsById:builder.query({
+      query:(id)=>{
+        return {
+          url:`/${id}`,
+          method:"GET"
+        }
+      }
+    })
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const { 
-  useAddLeadMutation 
+  useAddLeadMutation,
+  useGetAllLeadsQuery,
+  useDeleteLeadMutation,
+  useLazyGetAllLeadsQuery,
+  useGetLeadDetailsByIdQuery,
+  useLazyGetLeadDetailsByIdQuery
 } = leadsApi

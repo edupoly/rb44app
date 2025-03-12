@@ -11,6 +11,8 @@ import Home from './Home';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import AddLead from './features/leads/AddLead';
+import AllLeads from './features/leads/AllLeads';
+import EditLead from './features/leads/EditLead';
   
   const router = createBrowserRouter([
     {
@@ -28,6 +30,14 @@ import AddLead from './features/leads/AddLead';
         {
             path:"/addLead",
             element:<AddLead></AddLead>
+        },
+        {
+            path:"/allLeads",
+            element:<AllLeads></AllLeads>
+        },
+        {
+            path:"/editLead/:id",
+            element:<EditLead></EditLead>
         },
       ]
     },

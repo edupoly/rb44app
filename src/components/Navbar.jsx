@@ -26,6 +26,9 @@ function Navbar() {
                                     <Link class="nav-link active" aria-current="page" to="/addLead">Add Lead</Link>
                                 </li>
                                 <li class="nav-item">
+                                    <Link class="nav-link active" aria-current="page" to="/allLeads">All Leads</Link>
+                                </li>
+                                <li class="nav-item">
                                     <b class="nav-link btn btn-danger" onClick={()=>{dispatch(logout())}}>Logout</b>
                                 </li>
                             </>)
