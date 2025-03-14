@@ -1,10 +1,10 @@
 import { useFormik } from 'formik'
 import React from 'react'
-import { useAddLeadMutation } from '../../services/leadsApi';
+import { useAddLeadMutation, useLazyGetAllLeadsQuery } from '../../services/leadsApi';
 
 function AddLead() {
     var [addLeadFn]=useAddLeadMutation()
-    
+    var [getLeadsLazyFn] = useLazyGetAllLeadsQuery()
     var leadForm = useFormik({
         initialValues:{
             fullname:"mani",
@@ -19,8 +19,11 @@ function AddLead() {
         onSubmit:(values)=>{
             leadForm.setFieldValue("course",leadForm.values.course.toUpperCase())
             leadForm.values.course=leadForm.values.course.toUpperCase();
-            addLeadFn(leadForm.values).then(()=>{console.log('hihi');})
-            console.log("updated",values)
+            addLeadFn(leadForm.values).then(()=>{
+                console.log('hihi');
+                getLeadsLazyFn();
+            })
+
         }
     })
   return (

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useGetLeadDetailsByIdQuery } from '../../services/leadsApi';
+import { useGetLeadDetailsByIdQuery, useLazyGetAllLeadsQuery, useUpdateLeadMutation } from '../../services/leadsApi';
 import { useFormik } from 'formik'
 
 function EditLead() {
     var {id}=useParams();
     var {isLoading,data}=useGetLeadDetailsByIdQuery(id);
+    var [ updateLeadFn ]=useUpdateLeadMutation()
+    var [getAllLeadFn] = useLazyGetAllLeadsQuery()
     console.log(isLoading);
     var leadForm = useFormik({
         initialValues:{
@@ -20,6 +22,9 @@ function EditLead() {
         },
         onSubmit:(values)=>{
             console.log(values);
+            updateLeadFn(values).then(()=>{
+                getAllLeadFn()
+            })
         }
     })
     useEffect(()=>{
@@ -45,7 +50,7 @@ function EditLead() {
             <br />
             <input type="text" {...leadForm.getFieldProps('remarks[0].text')} placeholder='remark'/>
             <br />
-            <button type='submit'>Add Lead</button>
+            <button type='submit'>Update Lead</button>
         </form>
         <i>{JSON.stringify(leadForm.values)}</i>
         {

@@ -23,6 +23,24 @@ export const leadsApi = createApi({
             }
         }
     }),
+    updateLead:builder.mutation({
+        query:(lead)=>{
+            return {
+                url:`/${lead.id}`,
+                method:"PUT",
+                body:lead
+            }
+        }
+    }),
+    addLeadRemark:builder.mutation({
+      query:({id,remarks})=>{
+          return {
+              url:`/${id}`,
+              method:"PATCH",
+              body:{remarks}
+          }
+      }
+  }),
     getAllLeads:builder.query({
       query:()=>{
         return {
@@ -50,5 +68,7 @@ export const {
   useDeleteLeadMutation,
   useLazyGetAllLeadsQuery,
   useGetLeadDetailsByIdQuery,
-  useLazyGetLeadDetailsByIdQuery
+  useLazyGetLeadDetailsByIdQuery,
+  useUpdateLeadMutation,
+  useAddLeadRemarkMutation
 } = leadsApi

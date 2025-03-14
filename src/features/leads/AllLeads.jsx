@@ -24,7 +24,8 @@ function AllLeads() {
                         data?.map((lead)=>{
                             return <li>
                                     {lead.fullname}
-                                    <button onClick={()=>{deleteLead(lead)}}>Delete</button>
+                                    <Link to={`/addRemarks/${lead.id}`}  className='btn btn-success m-2 p-2'>Add Remark</Link>
+                                    <button onClick={()=>{deleteLead(lead)}} className='btn btn-danger m-2 p-2'>Delete</button>
                                     <Link className='btn btn-warning' to={`/editLead/${lead.id}`}>Edit</Link>
                                 </li>
                         })

@@ -13,6 +13,7 @@ import { store } from './app/store';
 import AddLead from './features/leads/AddLead';
 import AllLeads from './features/leads/AllLeads';
 import EditLead from './features/leads/EditLead';
+import AddRemarks from './features/leads/AddRemarks';
   
   const router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ import EditLead from './features/leads/EditLead';
             path:"/editLead/:id",
             element:<EditLead></EditLead>
         },
+        {
+          path:"/addRemarks/:id",
+          element:<AddRemarks></AddRemarks>
+        }
       ]
     },
   ]);
