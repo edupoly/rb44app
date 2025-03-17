@@ -6,7 +6,10 @@ import Navbar from './components/Navbar';
 import { useLazyGetUserDetailsByTokenQuery } from './services/userApi';
 import { useDispatch } from 'react-redux';
 import { updateUser } from './features/user/userSlice';
-
+import { socket } from '.';
+socket.on("updateUserStatus",(data)=>{
+  console.log(data);
+})
 function App() {
   var navigate = useNavigate();
   var dispatch = useDispatch();
@@ -17,6 +20,7 @@ var [getUserDetailsByTokenFn] = useLazyGetUserDetailsByTokenQuery();
       .then((res)=>{
         console.log(res)
         dispatch(updateUser(res))
+        socket.emit("updateUserStatus",{username:res.data.username})
       })
       navigate("/home")
     }

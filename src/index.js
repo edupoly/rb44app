@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import AddLead from './features/leads/AddLead';
 import { io } from "socket.io-client";
+import MessengerDashboard from './features/messenger/MessengerDashboard';
 
 export const socket = io("http://localhost:4140");
 socket.on("msg",(m)=>{console.log(m)})
@@ -30,8 +31,8 @@ socket.on("msg",(m)=>{console.log(m)})
             element:<Home></Home>
         },
         {
-            path:"/addLead",
-            element:<AddLead></AddLead>
+            path:"/messenger",
+            element:<MessengerDashboard></MessengerDashboard>
         },
       ]
     },

@@ -5,6 +5,7 @@ import { logout } from '../features/user/userSlice';
 
 function Navbar() {
     var {user} = useSelector(state=>state);
+
     var dispatch = useDispatch()
     console.log(user);
   return (
@@ -20,10 +21,10 @@ function Navbar() {
                         {
                             user.username && (<>
                                 <li class="nav-item">
-                                    <Link class="nav-link active" aria-current="page" to="/home">Home</Link>
+                                    <Link class="nav-link active" aria-current="page" to="/home"><b>{user.username.toUpperCase()}</b>Home</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link active" aria-current="page" to="/addLead">Add Lead</Link>
+                                    <Link class="nav-link active" aria-current="page" to="/messenger">Messenger</Link>
                                 </li>
                                 <li class="nav-item">
                                     <b class="nav-link btn btn-danger" onClick={()=>{dispatch(logout())}}>Logout</b>
