@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { socket } from '../../index'
+import { useLazyGetAllUsersQuery } from '../../services/messengerApi';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   username:"",
@@ -19,6 +22,7 @@ export const userSlice = createSlice({
         state.username="";
         state.role="";
         window.localStorage.removeItem("token")
+
     }
   },
 })

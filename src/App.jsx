@@ -7,12 +7,11 @@ import { useLazyGetUserDetailsByTokenQuery } from './services/userApi';
 import { useDispatch } from 'react-redux';
 import { updateUser } from './features/user/userSlice';
 import { socket } from '.';
-socket.on("updateUserStatus",(data)=>{
-  console.log(data);
-})
+
 function App() {
   var navigate = useNavigate();
   var dispatch = useDispatch();
+
 var [getUserDetailsByTokenFn] = useLazyGetUserDetailsByTokenQuery();
   useEffect(()=>{
     if(window.localStorage.getItem('token')){

@@ -1,13 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../features/user/userSlice';
+import { socket } from '..';
 
 function Navbar() {
     var {user} = useSelector(state=>state);
-
+    var navigate = useNavigate();
     var dispatch = useDispatch()
     console.log(user);
+    function logoutFn(){
+        socket.emit("updateUserStatus",{username:user.username,status:'offline'})
+        navigate("/login")
+        dispatch(logout())
+    }
   return (
     <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,7 +33,7 @@ function Navbar() {
                                     <Link class="nav-link active" aria-current="page" to="/messenger">Messenger</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <b class="nav-link btn btn-danger" onClick={()=>{dispatch(logout())}}>Logout</b>
+                                    <b class="nav-link btn btn-danger" onClick={()=>{logoutFn()}}>Logout</b>
                                 </li>
                             </>)
                         }

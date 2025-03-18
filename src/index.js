@@ -15,7 +15,7 @@ import { io } from "socket.io-client";
 import MessengerDashboard from './features/messenger/MessengerDashboard';
 
 export const socket = io("http://localhost:4140");
-socket.on("msg",(m)=>{console.log(m)})
+
 
   const router = createBrowserRouter([
     {
