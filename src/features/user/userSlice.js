@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   username:"",
-  role:""
+  role:"",
+  users:[]
 }
 
 export const userSlice = createSlice({
@@ -18,6 +19,10 @@ export const userSlice = createSlice({
         state.role=data.role
         window.localStorage.setItem("token",data.token)
     },
+    updateUsers:(state,{payload})=>{
+
+      state.users=payload;
+    },
     logout:(state)=>{
         state.username="";
         state.role="";
@@ -28,6 +33,6 @@ export const userSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateUser,logout } = userSlice.actions
+export const { updateUser,logout,updateUsers } = userSlice.actions
 var userReducer = userSlice.reducer
 export default userReducer;

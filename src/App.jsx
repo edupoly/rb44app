@@ -14,12 +14,13 @@ function App() {
 
 var [getUserDetailsByTokenFn] = useLazyGetUserDetailsByTokenQuery();
   useEffect(()=>{
+
     if(window.localStorage.getItem('token')){
       getUserDetailsByTokenFn(window.localStorage.getItem('token'))
       .then((res)=>{
         console.log(res)
         dispatch(updateUser(res))
-        socket.emit("updateUserStatus",{username:res.data.username})
+        socket.emit("updateUserStatus",{username:res.data.username,status:'online'})
       })
       navigate("/home")
     }
