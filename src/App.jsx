@@ -11,7 +11,9 @@ import { socket } from '.';
 function App() {
   var navigate = useNavigate();
   var dispatch = useDispatch();
-
+  socket.on("receivedMsg",(det)=>{
+    console.log("receivedMsg::",det);
+  })
 var [getUserDetailsByTokenFn] = useLazyGetUserDetailsByTokenQuery();
   useEffect(()=>{
 
